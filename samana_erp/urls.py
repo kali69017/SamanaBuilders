@@ -17,6 +17,7 @@ urlpatterns = [
     # Customers
     path('customers/', core_views.customers_view, name='customers'),
     path('customers/create/', core_views.customer_create_view, name='customer_create'),
+    path('customers/<int:pk>/', core_views.customer_detail_view, name='customer_detail'),
     path('customers/<int:pk>/edit/', core_views.customer_edit_view, name='customer_edit'),
     path('customers/<int:pk>/delete/', core_views.customer_delete_view, name='customer_delete'),
     
@@ -26,6 +27,7 @@ urlpatterns = [
     path('properties/project/<int:pk>/edit/', core_views.project_edit_view, name='project_edit'),
     path('properties/project/<int:pk>/delete/', core_views.project_delete_view, name='project_delete'),
     path('properties/plot/create/', core_views.plot_create_view, name='plot_create'),
+    path('properties/reserve/', core_views.reservation_create_view, name='reservation_create'),
     path('properties/plot/<int:pk>/edit/', core_views.plot_edit_view, name='plot_edit'),
     path('properties/plot/<int:pk>/delete/', core_views.plot_delete_view, name='plot_delete'),
     
@@ -36,6 +38,8 @@ urlpatterns = [
     path('bookings/<int:pk>/edit/', core_views.booking_edit_view, name='booking_edit'),
     path('bookings/<int:pk>/delete/', core_views.booking_delete_view, name='booking_delete'),
     
+    path('bookings/<int:pk>/transfer/', core_views.booking_transfer_view, name='booking_transfer'),
+
     # Payments
     path('payments/', core_views.payments_view, name='payments'),
     path('payments/create/', core_views.payment_create_view, name='payment_create'),
@@ -45,5 +49,10 @@ urlpatterns = [
     # Users & Admin
     path('users/', core_views.users_view, name='users'),
     path('users/create/', core_views.user_create_view, name='user_create'),
+    path('users/<int:pk>/edit/', core_views.user_edit_view, name='user_edit'),
+    path('users/<int:pk>/toggle-active/', core_views.user_deactivate_view, name='user_deactivate'),
     path('audit-logs/', core_views.audit_logs_view, name='audit_logs'),
+    
+    # Profile
+    path('profile/', core_views.profile_view, name='profile'),
 ]

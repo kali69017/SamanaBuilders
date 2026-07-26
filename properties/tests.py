@@ -30,7 +30,8 @@ class PlotFormTest(TestCase):
             'plot_type': 'residential',
             'size_marla': '5.00',
             'price': '5000000',
-            'status': 'available'
+            'status': 'available',
+            'holding_deposit': '500000'
         }
         form = PlotForm(data=form_data)
         self.assertTrue(form.is_valid())
@@ -42,7 +43,8 @@ class PlotFormTest(TestCase):
             'plot_type': 'residential',
             'size_marla': '5.00',
             'price': '-100',
-            'status': 'available'
+            'status': 'available',
+            'holding_deposit': '500000'
         }
         form = PlotForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -52,7 +54,7 @@ class PlotFormTest(TestCase):
 class PropertyViewTest(TestCase):
     def setUp(self):
         self.client = Client()
-        self.user = User.objects.create_user('testuser', 'test@example.com', 'testpass123')
+        self.user = User.objects.create_superuser('testuser', 'test@example.com', 'testpass123')
         self.client.login(username='testuser', password='testpass123')
         self.project = Project.objects.create(
             name='Test Project', location='Lahore', total_plots=100
@@ -88,7 +90,8 @@ class PropertyViewTest(TestCase):
             'plot_type': 'commercial',
             'size_marla': '10.00',
             'price': '10000000',
-            'status': 'available'
+            'status': 'available',
+            'holding_deposit': '1000000'
         })
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Plot.objects.count(), 1)
